@@ -45,6 +45,7 @@ document.querySelector('.btn-new').addEventListener('click', init);
 document.querySelector('.btn-roll').addEventListener('click', function () {
   // console.log('rolling the dice...');
   // generálunk egy random számot 1 és 6 között
+
   let dice = Math.floor(Math.random() * 6) + 1;
   // console.log(dice);
 
