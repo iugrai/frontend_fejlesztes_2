@@ -44,7 +44,7 @@ document.querySelector('.btn-new').addEventListener('click', init);
 // ha a roll dice gombra kattint a user ...
 document.querySelector('.btn-roll').addEventListener('click', function () {
   // console.log('rolling the dice...');
-  // generálunk egy random számot 1 és 6 között
+  //1. generálunk egy random számot 1 és 6 között
 
   let dice = Math.floor(Math.random() * 6) + 1;
   // console.log(dice);
@@ -55,15 +55,11 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
   //                                          string concatenation, sztring összefűzés
   diceDOM.setAttribute('src', 'dice-' + dice + '.png');
 
-  // 3. a dobot értéket kiszámoljuk, majd mejelenítük a piros dobozban
-  roundScore = roundScore + dice;
-
-  document.querySelector('#current-' + activePlayer).textContent = roundScore;
-
-  // ha a játékos 1-est dogm a roundScore értékét elveszti, és a következő játékos jön
+  // ha a játékos 1-est dob a roundScore értékét elveszti, és a következő játékos jön
 
   if (dice !== 1) {
     // a doboz értékét kiszámoljuk, majd megjelenítjük a piros dobozban...
+    roundScore = roundScore + dice;
 
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
 
@@ -96,14 +92,17 @@ function nextPlayer() {
 // ha a hold gombra rányom a játékos
 document.querySelector('.btn-hold').addEventListener('click', function () {
   // akkor a játékos megszerzi a kör alatt szerzett pontjait
-  // az előző érték plusz a montani...
+  // az előző érték plusz a mostani...
   scores[activePlayer] = scores[activePlayer] + roundScore;
   // update the UI
   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+  // ellenőrizzük, hogy van-e nyertes
   if (scores[activePlayer] >= 20) {
     // játék vége
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+
     document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
     document.querySelector('.btn-roll').style.display = 'none';
     document.querySelector('.btn-hold').style.display = 'none';
